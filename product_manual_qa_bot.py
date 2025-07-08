@@ -2,7 +2,7 @@ import streamlit as st
 import pdfplumber
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.embeddings import OpenAIEmbeddings
-from langchain.vectorstores import Chroma
+#from langchain.vectorstores import Chroma
 from langchain.chains import RetrievalQA
 from langchain.chat_models import ChatOpenAI
 import os
@@ -24,10 +24,14 @@ if uploaded_file is not None:
     splitter = RecursiveCharacterTextSplitter(chunk_size=500, chunk_overlap=100)
     chunks = splitter.split_text(full_text)
 
+    # Create FAISS vector store (in memory)
+    vectordb = FAISS.from_texts(chunks, embedding=embeddings)
+
+
     # Create or load vector store
-    db_dir = "./chroma_store"
-    vectordb = Chroma.from_texts(chunks, embedding=embeddings, persist_directory=db_dir)
-    vectordb.persist()
+    # db_dir = "./chroma_store"
+    # vectordb = Chroma.from_texts(chunks, embedding=embeddings, persist_directory=db_dir)
+    # vectordb.persist()
 
     # Setup retriever
     retriever = vectordb.as_retriever()
