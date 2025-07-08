@@ -1,0 +1,7 @@
+streamlit
+pdfplumber
+langchain
+langchain-community
+openai
+chromadb
+tiktoken
