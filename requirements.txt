@@ -8,3 +8,4 @@ tiktoken
 protobuf==3.20.3
 #sqlite3>=3.35.0
 faiss-cpu
+streamlit==1.30.0
